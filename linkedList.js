@@ -1,0 +1,232 @@
+function Node(value = null, next = null) {
+  return { value, next };
+}
+
+function LinkedList() {
+  let listHead = null;
+
+  const append = (value) => {
+    const newNode = Node(value);
+    const traverse = (node, newEnd) => {
+      if (node.next === null) {
+        node.next = newEnd;
+      } else {
+        return traverse(node.next, newEnd);
+      }
+    };
+
+    if (listHead === null) {
+      listHead = newNode;
+    } else {
+      traverse(listHead, newNode);
+    }
+  };
+
+  const prepend = (value) => {
+    if (listHead === null) {
+      listHead = Node(value);
+    } else {
+      listHead = Node(value, listHead);
+    }
+  };
+
+  const size = () => {
+    let count = 0;
+    const traverse = (node) => {
+      if (node.next === null) {
+        return 1;
+      }
+      return 1 + traverse(node.next);
+    };
+
+    if (listHead !== null) {
+      count = traverse(listHead);
+    }
+
+    return count;
+  };
+
+  const head = () => listHead;
+
+  const tail = () => {
+    let tailNode = null;
+    const traverse = (node) => {
+      if (node.next === null) {
+        return node;
+      }
+
+      return traverse(node.next);
+    };
+
+    if (listHead !== null) {
+      tailNode = traverse(listHead);
+    }
+
+    return tailNode;
+  };
+
+  const at = (index) => {
+    let returnNode = null;
+    const traverse = (node, target, depth = 0) => {
+      if (depth === target) {
+        return node;
+      }
+
+      if (node.next === null) {
+        return null;
+      }
+
+      const nextNode = node.next;
+      return traverse(nextNode, target, depth + 1);
+    };
+
+    if (listHead !== null) {
+      returnNode = traverse(listHead, index);
+    }
+
+    return returnNode;
+  };
+
+  const pop = () => {
+    const traverse = (node, prevNode) => {
+      if (node.next === null) {
+        if (prevNode === undefined) {
+          listHead = null;
+        } else {
+          prevNode.next = null;
+        }
+      } else {
+        return traverse(node.next, node);
+      }
+    };
+
+    if (listHead !== null) {
+      traverse(listHead);
+    }
+  };
+
+  const contains = (value) => {
+    const traverse = (node, target) => {
+      if (node.value === target) {
+        return true;
+      }
+
+      if (node.next === null) {
+        return false;
+      }
+
+      return traverse(node.next, target);
+    };
+
+    if (listHead !== null) {
+      return traverse(listHead, value);
+    }
+
+    return false;
+  };
+
+  const find = (value) => {
+    const traverse = (node, target, depth = 0) => {
+      if (Object.keys(node.value)[0] === target) {
+        return depth;
+      }
+
+      if (node.next === null) {
+        return null;
+      }
+
+      return traverse(node.next, target, depth + 1);
+    };
+
+    if (listHead !== null) {
+      return traverse(listHead, value);
+    }
+
+    return false;
+  };
+
+  const toString = () => {
+    const traverse = (node) => {
+      if (node.next === null) {
+        return `(${node.value}) -> null`;
+      }
+
+      return `(${node.value}) -> ${traverse(node.next)}`;
+    };
+
+    if (listHead !== null) {
+      const returnString = traverse(listHead);
+      console.log(returnString);
+      return returnString;
+    }
+
+    console.log("null");
+    return "null";
+  };
+
+  const insertAt = (value, index) => {
+    const traverse = (insertValue, insertIndex, node, prevNode, depth = 0) => {
+      if (insertIndex === depth) {
+        if (insertIndex === 0) {
+          listHead = Node(insertValue, node);
+          return;
+        }
+
+        const newNode = Node(insertValue, node);
+        prevNode.next = newNode;
+        return;
+      }
+
+      if (node.next === null) {
+        return;
+      }
+
+      return traverse(insertValue, insertIndex, node.next, node, depth + 1);
+    };
+
+    if (listHead !== null) {
+      return traverse(value, index, listHead);
+    }
+  };
+
+  const removeAt = (index) => {
+    const traverse = (removeIndex, node, prevNode, depth = 0) => {
+      if (removeIndex === depth) {
+        if (removeIndex === 0) {
+          listHead = node.next;
+          return;
+        }
+
+        prevNode.next = node.next;
+        return;
+      }
+
+      if (node.next === null) {
+        return;
+      }
+
+      return traverse(removeIndex, node.next, node, depth + 1);
+    };
+
+    if (listHead !== null) {
+      return traverse(index, listHead);
+    }
+  };
+
+  return {
+    append,
+    prepend,
+    size,
+    head,
+    tail,
+    at,
+    pop,
+    contains,
+    find,
+    toString,
+    insertAt,
+    removeAt,
+  };
+}
+
+export default LinkedList;
