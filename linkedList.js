@@ -107,7 +107,7 @@ function LinkedList() {
 
   const contains = (value) => {
     const traverse = (node, target) => {
-      if (node.value === target) {
+      if (Object.keys(node.value)[0] === target) {
         return true;
       }
 
