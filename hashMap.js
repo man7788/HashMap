@@ -65,7 +65,19 @@ function HashMap() {
     return returnValue;
   };
 
-  return { getIndexList, hash, set, get };
+  const has = (key) => {
+    const index = hash(key);
+    let returnValue = false;
+
+    if (buckets[index] !== undefined) {
+      returnValue = buckets[index].contains(key);
+      return returnValue;
+    }
+
+    return returnValue;
+  };
+
+  return { getIndexList, hash, set, get, has };
 }
 
 export default HashMap;
