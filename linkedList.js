@@ -230,6 +230,27 @@ function LinkedList() {
     }
   };
 
+  const toEntries = () => {
+    const returnArray = [];
+    const traverse = (node) => {
+      const entriesArray = [];
+      if (node === null) {
+        return;
+      }
+
+      entriesArray.push(Object.keys(node.value)[0]);
+      entriesArray.push(Object.values(node.value)[0]);
+      returnArray.push(entriesArray);
+
+      return traverse(node.next);
+    };
+
+    if (listHead !== null) {
+      traverse(listHead);
+      return returnArray;
+    }
+  };
+
   return {
     append,
     prepend,
@@ -244,6 +265,7 @@ function LinkedList() {
     removeAt,
     toKeys,
     toValues,
+    toEntries,
   };
 }
 
