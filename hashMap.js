@@ -80,7 +80,22 @@ function HashMap() {
     return returnValue;
   };
 
-  return { getIndexList, hash, set, get, has };
+  const remove = (key) => {
+    const index = hash(key);
+    let returnValue = false;
+
+    if (buckets[index] !== undefined) {
+      const keyIndex = buckets[index].find(key);
+      if (keyIndex !== null) {
+        buckets[index].removeAt(keyIndex);
+        returnValue = true;
+      }
+    }
+
+    return returnValue;
+  };
+
+  return { getIndexList, hash, set, get, has, remove };
 }
 
 export default HashMap;
