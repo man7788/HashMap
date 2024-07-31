@@ -111,7 +111,31 @@ function HashMap() {
     buckets = new Array(capacity);
   };
 
-  return { getIndexList, hash, set, get, has, remove, length, clear };
+  const keys = () => {
+    const returnArray = [];
+    for (let i = 0; i < buckets.length; i++) {
+      const element = buckets[i];
+      if (element !== undefined) {
+        const bucketArray = buckets[i].toKeys();
+        bucketArray.forEach((key) => {
+          returnArray.push(key);
+        });
+      }
+    }
+    return returnArray;
+  };
+
+  return {
+    getIndexList,
+    hash,
+    set,
+    get,
+    has,
+    remove,
+    length,
+    clear,
+    keys,
+  };
 }
 
 export default HashMap;
