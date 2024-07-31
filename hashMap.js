@@ -1,7 +1,8 @@
 import LinkedList from "./linkedList.js";
 
 function HashMap() {
-  const buckets = new Array(16);
+  const capacity = 16;
+  let buckets = new Array(capacity);
 
   const checkBound = (index) => {
     if (index < 0 || index >= buckets.length) {
@@ -106,7 +107,11 @@ function HashMap() {
     return returnLength;
   };
 
-  return { getIndexList, hash, set, get, has, remove, length };
+  const clear = () => {
+    buckets = new Array(capacity);
+  };
+
+  return { getIndexList, hash, set, get, has, remove, length, clear };
 }
 
 export default HashMap;
