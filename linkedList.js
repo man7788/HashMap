@@ -145,25 +145,6 @@ function LinkedList() {
     return false;
   };
 
-  const toString = () => {
-    const traverse = (node) => {
-      if (node.next === null) {
-        return `(${node.value}) -> null`;
-      }
-
-      return `(${node.value}) -> ${traverse(node.next)}`;
-    };
-
-    if (listHead !== null) {
-      const returnString = traverse(listHead);
-      console.log(returnString);
-      return returnString;
-    }
-
-    console.log("null");
-    return "null";
-  };
-
   const insertAt = (value, index) => {
     const traverse = (insertValue, insertIndex, node, prevNode, depth = 0) => {
       if (insertIndex === depth) {
@@ -213,6 +194,24 @@ function LinkedList() {
     }
   };
 
+  const toKeys = () => {
+    const returnArray = [];
+    const traverse = (node) => {
+      if (node === null) {
+        return;
+      }
+
+      returnArray.push(Object.keys(node.value)[0]);
+
+      return traverse(node.next);
+    };
+
+    if (listHead !== null) {
+      traverse(listHead);
+      return returnArray;
+    }
+  };
+
   return {
     append,
     prepend,
@@ -223,9 +222,9 @@ function LinkedList() {
     pop,
     contains,
     find,
-    toString,
     insertAt,
     removeAt,
+    toKeys,
   };
 }
 
