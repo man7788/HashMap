@@ -95,7 +95,18 @@ function HashMap() {
     return returnValue;
   };
 
-  return { getIndexList, hash, set, get, has, remove };
+  const length = () => {
+    let returnLength = 0;
+    for (let i = 0; i < buckets.length; i++) {
+      const element = buckets[i];
+      if (element !== undefined) {
+        returnLength += buckets[i].size();
+      }
+    }
+    return returnLength;
+  };
+
+  return { getIndexList, hash, set, get, has, remove, length };
 }
 
 export default HashMap;
