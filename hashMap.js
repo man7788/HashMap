@@ -139,6 +139,20 @@ function HashMap() {
     return returnArray;
   };
 
+  const entries = () => {
+    const returnArray = [];
+    for (let i = 0; i < buckets.length; i++) {
+      const element = buckets[i];
+      if (element !== undefined) {
+        const bucketArray = buckets[i].toEntries();
+        bucketArray.forEach((key) => {
+          returnArray.push(key);
+        });
+      }
+    }
+    return returnArray;
+  };
+
   return {
     getIndexList,
     hash,
@@ -150,6 +164,7 @@ function HashMap() {
     clear,
     keys,
     values,
+    entries,
   };
 }
 
