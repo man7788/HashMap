@@ -142,6 +142,10 @@ class HashSet {
     }
     return returnLength;
   }
+
+  clear() {
+    this.buckets = new Array(this.capacity);
+  }
 }
 
 export default HashSet;
