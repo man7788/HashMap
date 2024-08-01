@@ -77,10 +77,10 @@ class HashSet {
         // Iterate ALL keys (all linked list elements)
         for (let i = 0; i < oldBuckets.length; i++) {
           if (oldBuckets[i] !== undefined) {
-            const entriesList = oldBuckets[i].toEntries();
+            const entriesList = oldBuckets[i].toKeys();
             entriesList.forEach((element) => {
               // Store each key to bucket with new hash key
-              this.setKey(element[0]);
+              setKey(element);
             });
           }
         }
