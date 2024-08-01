@@ -105,6 +105,18 @@ class HashSet {
     return returnValue;
   }
 
+  has(key) {
+    const index = this.hash(key);
+    let returnValue = false;
+
+    if (this.buckets[index] !== undefined) {
+      returnValue = this.buckets[index].contains(key);
+      return returnValue;
+    }
+
+    return returnValue;
+  }
+
   length() {
     let returnLength = 0;
     for (let i = 0; i < this.buckets.length; i++) {
