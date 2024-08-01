@@ -91,6 +91,20 @@ class HashSet {
     setKey(key);
   }
 
+  get(key) {
+    const index = this.hash(key);
+    let returnValue = null;
+
+    if (this.buckets[index] !== undefined) {
+      const keyIndex = this.buckets[index].find(key);
+      if (keyIndex !== null) {
+        const { value } = this.buckets[index].at(keyIndex);
+        returnValue = value;
+      }
+    }
+    return returnValue;
+  }
+
   length() {
     let returnLength = 0;
     for (let i = 0; i < this.buckets.length; i++) {
