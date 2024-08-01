@@ -146,6 +146,20 @@ class HashSet {
   clear() {
     this.buckets = new Array(this.capacity);
   }
+
+  keys() {
+    const returnArray = [];
+    for (let i = 0; i < this.buckets.length; i++) {
+      const element = this.buckets[i];
+      if (element !== undefined) {
+        const bucketArray = this.buckets[i].toKeys();
+        bucketArray.forEach((key) => {
+          returnArray.push(key);
+        });
+      }
+    }
+    return returnArray;
+  }
 }
 
 export default HashSet;
