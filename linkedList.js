@@ -127,8 +127,16 @@ function LinkedList() {
 
   const find = (value) => {
     const traverse = (node, target, depth = 0) => {
-      if (Object.keys(node.value)[0] === target) {
-        return depth;
+      if (typeof node.value === 'string') {
+        if (node.value === target) {
+          return depth;
+        }
+      }
+
+      if (typeof node.value === 'object') {
+        if (Object.keys(node.value)[0] === target) {
+          return depth;
+        }
       }
 
       if (node.next === null) {
