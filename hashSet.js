@@ -117,6 +117,21 @@ class HashSet {
     return returnValue;
   }
 
+  remove(key) {
+    const index = this.hash(key);
+    let returnValue = false;
+
+    if (this.buckets[index] !== undefined) {
+      const keyIndex = this.buckets[index].find(key);
+      if (keyIndex !== null) {
+        this.buckets[index].removeAt(keyIndex);
+        returnValue = true;
+      }
+    }
+
+    return returnValue;
+  }
+
   length() {
     let returnLength = 0;
     for (let i = 0; i < this.buckets.length; i++) {
