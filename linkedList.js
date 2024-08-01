@@ -217,7 +217,13 @@ function LinkedList() {
         return;
       }
 
-      returnArray.push(Object.keys(node.value)[0]);
+      if (typeof node.value === 'string') {
+        returnArray.push(node.value);
+      }
+
+      if (typeof node.value === 'object') {
+        returnArray.push(Object.keys(node.value)[0]);
+      }
 
       return traverse(node.next);
     };
